@@ -1,0 +1,140 @@
+<html>
+<head>
+<title>main.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #66d9ef; font-style: italic;}
+.s1 { color: #f8f8f2;}
+.s2 { color: #f92672;}
+.s3 { color: #ae81ff;}
+.s4 { color: #75715e;}
+.s5 { color: #e6db74;}
+</style>
+</head>
+<body bgcolor="#272822">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+main.py</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">pygame</span>
+<span class="s0">from </span><span class="s1">pygame.locals </span><span class="s0">import </span><span class="s2">*</span>
+<span class="s0">from </span><span class="s1">sys </span><span class="s0">import </span><span class="s1">exit</span>
+<span class="s0">from </span><span class="s1">random </span><span class="s0">import </span><span class="s1">randrange, choice</span>
+
+
+
+<span class="s1">pygame.init()</span>
+
+<span class="s1">WHITE </span><span class="s2">= </span><span class="s1">(</span><span class="s3">255</span><span class="s1">, </span><span class="s3">255</span><span class="s1">, </span><span class="s3">255</span><span class="s1">)</span>
+<span class="s1">BLACK </span><span class="s2">= </span><span class="s1">(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">)</span>
+<span class="s1">GREEN </span><span class="s2">= </span><span class="s1">(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">255</span><span class="s1">, </span><span class="s3">0</span><span class="s1">)</span>
+<span class="s1">RED </span><span class="s2">= </span><span class="s1">(</span><span class="s3">255</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">)</span>
+<span class="s1">BLUE </span><span class="s2">= </span><span class="s1">(</span><span class="s3">0</span><span class="s1">, </span><span class="s3">0</span><span class="s1">, </span><span class="s3">255</span><span class="s1">)</span>
+<span class="s1">FONT_SIZE </span><span class="s2">= </span><span class="s3">8</span>
+<span class="s1">FPS </span><span class="s2">= </span><span class="s3">15</span>
+
+<span class="s1">SCREEN_WIDTH </span><span class="s2">= </span><span class="s3">640</span>
+<span class="s1">SCREEN_HEIGHT </span><span class="s2">= </span><span class="s3">480</span>
+
+<span class="s1">obj_list </span><span class="s2">= </span><span class="s1">[]</span>
+<span class="s1">repeat_list </span><span class="s2">= </span><span class="s1">[]</span>
+<span class="s1">number_of_obj </span><span class="s2">= </span><span class="s3">20</span>
+<span class="s1">generate </span><span class="s2">= </span><span class="s0">False</span>
+
+<span class="s4">##Creando las letras que apareceran</span>
+<span class="s1">letters </span><span class="s2">= </span><span class="s1">[</span><span class="s5">'a'</span><span class="s1">,</span><span class="s5">'b'</span><span class="s1">,</span><span class="s5">'c'</span><span class="s1">,</span><span class="s5">'d'</span><span class="s1">,</span><span class="s5">'e'</span><span class="s1">,</span><span class="s5">'f'</span><span class="s1">,</span><span class="s5">'g'</span><span class="s1">,</span><span class="s5">'h'</span><span class="s1">,</span><span class="s5">'i'</span><span class="s1">,</span><span class="s5">'j'</span><span class="s1">,</span><span class="s5">'k'</span><span class="s1">,</span><span class="s5">'l'</span><span class="s1">,</span><span class="s5">'m'</span><span class="s1">,</span><span class="s5">'n'</span><span class="s1">,</span><span class="s5">'o'</span><span class="s1">,</span><span class="s5">'p'</span><span class="s1">,</span><span class="s5">'q'</span><span class="s1">,</span><span class="s5">'r'</span><span class="s1">,</span><span class="s5">'s'</span><span class="s1">,</span><span class="s5">'t'</span><span class="s1">,</span><span class="s5">'u'</span><span class="s1">,</span><span class="s5">'v'</span><span class="s1">,</span><span class="s5">'w'</span><span class="s1">,</span><span class="s5">'x'</span><span class="s1">,</span><span class="s5">'y'</span><span class="s1">,</span><span class="s5">'z'</span><span class="s1">,</span><span class="s5">'0'</span><span class="s1">,</span><span class="s5">'1'</span><span class="s1">,</span><span class="s5">'2'</span><span class="s1">,</span><span class="s5">'3'</span><span class="s1">,</span><span class="s5">'4'</span><span class="s1">,</span><span class="s5">'5'</span><span class="s1">,</span><span class="s5">'6'</span><span class="s1">,</span><span class="s5">'7'</span><span class="s1">,</span><span class="s5">'8'</span><span class="s1">,</span><span class="s5">'9'</span><span class="s1">]</span>
+
+<span class="s4">##CREANDO LA VENTANA DE ANIMACION</span>
+<span class="s1">screen </span><span class="s2">= </span><span class="s1">pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))</span>
+<span class="s1">pygame.display.set_caption(</span><span class="s5">'matrix Animation by d0t'</span><span class="s1">)</span>
+
+<span class="s1">font </span><span class="s2">= </span><span class="s1">pygame.font.SysFont(</span><span class="s5">'arial'</span><span class="s1">, FONT_SIZE, </span><span class="s0">True</span><span class="s1">, </span><span class="s0">True</span><span class="s1">)</span>
+<span class="s4">#message = 'hello world'</span>
+<span class="s4">#text = font.render(message, True, GREEN)</span>
+
+<span class="s0">class </span><span class="s1">Codeline</span><span class="s2">:</span>
+    <span class="s0">def </span><span class="s1">__init__(self)</span><span class="s2">:</span>
+        <span class="s1">self.fill </span><span class="s2">= </span><span class="s3">1</span>
+        <span class="s1">self.ypos_list </span><span class="s2">= </span><span class="s1">[]</span>
+        <span class="s1">self.letters_list </span><span class="s2">= </span><span class="s1">[]</span>
+        <span class="s1">self.xpos </span><span class="s2">= </span><span class="s1">randrange(FONT_SIZE, SCREEN_WIDTH </span><span class="s2">+ </span><span class="s1">FONT_SIZE, FONT_SIZE )</span>
+        <span class="s1">self.ypos </span><span class="s2">= </span><span class="s1">randrange(</span><span class="s3">0</span><span class="s1">, SCREEN_HEIGHT </span><span class="s2">+ </span><span class="s1">FONT_SIZE, FONT_SIZE)</span>
+        <span class="s1">self.ypos_list.append(self.ypos)</span>
+
+    <span class="s0">def </span><span class="s1">draw_codeline(self)</span><span class="s2">:</span>
+        <span class="s1">randomic_letter </span><span class="s2">= </span><span class="s1">choice(letters)</span>
+        <span class="s1">self.letters_list.append(randomic_letter)</span>
+        <span class="s0">for </span><span class="s1">msg, y </span><span class="s0">in </span><span class="s1">zip(self.letters_list, self.ypos_list)</span><span class="s2">:</span>
+            <span class="s1">message </span><span class="s2">= </span><span class="s5">f'</span><span class="s3">{</span><span class="s1">msg</span><span class="s3">}</span><span class="s5">'</span>
+            <span class="s1">text </span><span class="s2">= </span><span class="s1">font.render(message, </span><span class="s0">True</span><span class="s1">, GREEN)</span>
+            <span class="s1">screen.blit(text, (self.xpos, y))</span>
+
+
+    <span class="s0">def </span><span class="s1">desloc_codeline(self)</span><span class="s2">:</span>
+        <span class="s0">if </span><span class="s1">self.ypos </span><span class="s2">&gt; </span><span class="s1">SCREEN_HEIGHT </span><span class="s0">or </span><span class="s1">len(self.ypos_list) </span><span class="s2">&gt; </span><span class="s3">20</span><span class="s2">:</span>
+            <span class="s1">message </span><span class="s2">= </span><span class="s5">' '</span>
+            <span class="s1">text </span><span class="s2">= </span><span class="s1">font.render(message, </span><span class="s0">True</span><span class="s1">, WHITE)</span>
+            <span class="s1">screen.fill(BLACK, (self.xpos, self.ypos_list[</span><span class="s3">0</span><span class="s1">], text.get_width() </span><span class="s2">+ </span><span class="s1">FONT_SIZE, text.get_height() </span><span class="s2">* </span><span class="s1">self.fill))</span>
+            <span class="s0">if </span><span class="s1">text.get_height() </span><span class="s2">* </span><span class="s1">self.fill </span><span class="s2">&gt; </span><span class="s1">len(self.ypos_list) </span><span class="s2">* </span><span class="s1">text.get_height()</span><span class="s2">:</span>
+                <span class="s1">self.letters_list.clear()</span>
+            <span class="s0">else</span><span class="s2">:</span>
+                <span class="s1">self.fill </span><span class="s2">+= </span><span class="s3">1</span>
+
+        <span class="s0">else</span><span class="s2">:</span>
+            <span class="s1">self.ypos </span><span class="s2">+= </span><span class="s1">FONT_SIZE</span>
+            <span class="s1">self.ypos_list.append(self.ypos)</span>
+            <span class="s1">message </span><span class="s2">= </span><span class="s5">f'</span><span class="s3">{</span><span class="s1">self.letters_list[</span><span class="s2">-</span><span class="s3">1</span><span class="s1">]</span><span class="s3">}</span><span class="s5">'</span>
+            <span class="s1">text </span><span class="s2">= </span><span class="s1">font.render(message, </span><span class="s0">True</span><span class="s1">, WHITE)</span>
+            <span class="s1">screen.fill(BLACK, (self.xpos, self.ypos_list[</span><span class="s2">-</span><span class="s3">1</span><span class="s1">], text.get_width() </span><span class="s2">+ </span><span class="s1">FONT_SIZE, text.get_height())</span>
+            <span class="s1">)</span>
+            <span class="s1">screen.blit(text, (self.xpos, self.ypos_list[</span><span class="s2">-</span><span class="s3">1</span><span class="s1">]))</span>
+
+<span class="s0">def </span><span class="s1">create_multiples_obj(obj_list, number_of_obj, generate)</span><span class="s2">:</span>
+    <span class="s0">if </span><span class="s1">generate</span><span class="s2">:</span>
+        <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">range(number_of_obj)</span><span class="s2">:</span>
+            <span class="s1">obj </span><span class="s2">= </span><span class="s1">Codeline()</span>
+            <span class="s0">if </span><span class="s1">obj.xpos </span><span class="s0">in </span><span class="s1">repeat_list </span><span class="s0">or </span><span class="s1">obj.ypos </span><span class="s2">&gt; </span><span class="s1">SCREEN_HEIGHT</span><span class="s2">:</span>
+                <span class="s1">repeat_list.remove(obj.xpos)</span>
+                <span class="s0">del </span><span class="s1">obj</span>
+            <span class="s0">else</span><span class="s2">:</span>
+                <span class="s1">obj_list.append(obj)</span>
+                <span class="s1">repeat_list.append(obj.xpos)</span>
+        <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">obj_list</span><span class="s2">:</span>
+            <span class="s1">i.draw_codeline()</span>
+            <span class="s1">i.desloc_codeline()</span>
+    <span class="s0">else</span><span class="s2">:</span>
+        <span class="s0">for </span><span class="s1">i </span><span class="s0">in </span><span class="s1">obj_list</span><span class="s2">:</span>
+            <span class="s1">i.draw_codeline()</span>
+            <span class="s1">i.desloc_codeline()</span>
+
+<span class="s4">#obj = Codeline()</span>
+
+<span class="s1">clock </span><span class="s2">= </span><span class="s1">pygame.time.Clock()</span>
+<span class="s1">initial_time </span><span class="s2">= </span><span class="s3">0</span>
+<span class="s1">current_time </span><span class="s2">= </span><span class="s3">0</span>
+
+<span class="s0">while True</span><span class="s2">:</span>
+    <span class="s1">clock.tick(FPS)</span>
+    <span class="s1">screen.fill((BLACK))</span>
+    <span class="s0">for </span><span class="s1">event </span><span class="s0">in </span><span class="s1">pygame.event.get()</span><span class="s2">:</span>
+        <span class="s0">if </span><span class="s1">event.type </span><span class="s2">== </span><span class="s1">QUIT</span><span class="s2">:</span>
+            <span class="s1">pygame.quit()</span>
+            <span class="s1">exit()</span>
+    <span class="s1">current_time </span><span class="s2">= </span><span class="s1">pygame.time.get_ticks()</span>
+    <span class="s0">if </span><span class="s1">current_time </span><span class="s2">- </span><span class="s1">initial_time </span><span class="s2">&gt; </span><span class="s3">200</span><span class="s2">:</span>
+        <span class="s1">generate </span><span class="s2">= </span><span class="s0">True</span>
+        <span class="s1">initial_time </span><span class="s2">= </span><span class="s1">pygame.time.get_ticks()</span>
+
+
+
+    <span class="s1">create_multiples_obj(obj_list, number_of_obj, generate)</span>
+
+
+    <span class="s4">#obj.draw_codeline()</span>
+    <span class="s4">#obj.desloc_codeline()</span>
+    <span class="s4">#screen.blit(text, (SCREEN_WIDTH/2, SCREEN_HEIGHT/2))</span>
+
+    <span class="s1">pygame.display.flip()</span></pre>
+</body>
+</html>
